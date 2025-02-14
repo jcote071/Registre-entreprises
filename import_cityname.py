@@ -1,7 +1,8 @@
 import pandas as pd
+import registre_mod.LoadData as ld
 
-cityname_data_url = "https://donneesouvertes.affmunqc.net/repertoire/MUN.csv"
-cityname_data_pkl_filename = "mun_ref_data.pkl"
+mun_data_api_url = url = 'https://www.donneesquebec.ca/recherche/api/3/action/datastore_search?resource_id=19385b4e-5503-4330-9e59-f998f5918363'
+
 cityname_df_cols_to_keep = [
     "mcode",
     "munnom",
@@ -11,10 +12,7 @@ cityname_df_cols_to_keep = [
     "mrc"
 ]
 
-cityname_df = pd.read_csv(
-    cityname_data_url,
-    usecols=cityname_df_cols_to_keep
-)
+mun_ref_df = ld.import_data_from_dq_api(mun_data_api_url)
 
 #Pull codes from mrc, regadm and divrec
 cityname_df['mrc_code'] = cityname_df['mrc'].str.extract('.*\((.*)\).*')
