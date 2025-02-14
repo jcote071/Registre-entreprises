@@ -14,6 +14,8 @@ cityname_df_cols_to_keep = [
 
 mun_ref_df = ld.import_data_from_dq_api(mun_data_api_url)
 
+ld.pickle_to_temp(mun_ref_df,"mun_ref_df")
+
 #Pull codes from mrc, regadm and divrec
 cityname_df['mrc_code'] = cityname_df['mrc'].str.extract('.*\((.*)\).*')
 cityname_df['mrc_code'] = cityname_df['mrc_code'].astype('category')

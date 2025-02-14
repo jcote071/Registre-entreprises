@@ -19,7 +19,7 @@ def import_data_from_dq_api(url:str) -> pd.DataFrame:
 
     nb_loop_iterations = math.ceil(nb_records/100)
     
-    df = d.DataFrame(
+    df = pd.DataFrame(
     response.json()['result']['records']
     )
 
@@ -57,5 +57,7 @@ def pickle_to_temp(obj:object,filename:str)-> None:
         f"{filename}.pkl"
     )
     
-    pickle.dump(obj=obj,file=filename)
+    with open(file_path, 'wb') as f:
+        pickle.dump(obj, f)
+    
     
